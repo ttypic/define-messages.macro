@@ -33,6 +33,26 @@ pluginTester({
             setup: () => {
                 process.env.NODE_ENV = 'production';
             }
+        },
+        'it throws MacroError if no `setupPrefix` method calls': {
+            fixture: path.join(__dirname, 'fixtures/no-setup-method/code.js'),
+            error: Macros.MacroError
+        },
+        'it throws MacroError if `setupPrefix` method spelled wrong': {
+            fixture: path.join(__dirname, 'fixtures/setup-method-spelled-wrong/code.js'),
+            error: Macros.MacroError
+        },
+        'it throws MacroError if no arguments for `defineMessages`': {
+            fixture: path.join(__dirname, 'fixtures/define-messages-no-args/code.js'),
+            error: Macros.MacroError
+        },
+        'it throws MacroError if arguments has wrong type': {
+            fixture: path.join(__dirname, 'fixtures/define-messages-wrong-type/code.js'),
+            error: Macros.MacroError
+        },
+        'it throws MacroError if arguments has wrong object': {
+            fixture: path.join(__dirname, 'fixtures/define-messages-wrong-object/code.js'),
+            error: Macros.MacroError
         }
     }
 });

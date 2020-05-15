@@ -3,7 +3,7 @@ const { addNamed } = require('@babel/helper-module-imports');
 
 const findPrefix = memberPath => {
     if (memberPath.node.property.name !== 'setupPrefix') {
-        throw new MacroError('define-messages.macro: defineMessage has one only setupPrefix method');
+        throw new MacroError('define-messages.macro: `defineMessage` has one only `setupPrefix` method');
     }
     return memberPath.parentPath.get('arguments')[0].evaluate().value;
 };
@@ -22,6 +22,8 @@ const addId = ({ prop, prefix, t }) => {
         if (properties.some(p => p.key.name === 'id')) return;
         const idProperty = t.objectProperty(t.identifier('id'), t.stringLiteral(`${prefix}.${keyName}`));
         properties.unshift(idProperty);
+    } else {
+        throw new MacroError('define-messages.macro: `defineMessages` has wrong argument');
     }
 };
 
@@ -29,11 +31,11 @@ const replaceMessagesArgument = ({ callPath, prefix, t }) => {
     const callArguments = callPath.get('arguments');
 
     if (callArguments.length !== 1) {
-        throw new MacroError('define-messages.macro: defineMessage should have exact one argument');
+        throw new MacroError('define-messages.macro: `defineMessage` should have exact one argument');
     }
 
     if (callArguments[0].type !== 'ObjectExpression') {
-        throw new MacroError('define-messages.macro: defineMessage should have object argument');
+        throw new MacroError('define-messages.macro: `defineMessage` should have object argument');
     }
 
     const props = callArguments[0].node.properties;
@@ -49,7 +51,7 @@ const defineMessagesMacro = ({ references, state, babel }) => {
     const members = references.default.filter(referencePath => referencePath.parentPath.type === 'MemberExpression');
 
     if (members.length !== 1) {
-        throw new MacroError('define-messages.macro: You should setup exact one file prefix');
+        throw new MacroError('define-messages.macro: you should setup exact one file prefix');
     }
 
     const memberExpression = members[0].parentPath;
