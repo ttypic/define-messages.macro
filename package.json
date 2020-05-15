@@ -2,7 +2,7 @@
   "name": "define-messages.macro",
   "version": "0.1.0",
   "description": "Generate id for react-intl messages automatically",
-  "main": "src/define-messages.js",
+  "main": "define-messages.macro.js",
   "scripts": {
     "test": "jest"
   },
@@ -20,6 +20,11 @@
   "engines": {
     "node": ">=10.12"
   },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "define-messages.macro.js"
+  ],
   "author": "Evgeny Khokhlov <khokhlov.e.n@gmail.com>",
   "license": "MIT",
   "bugs": {
@@ -31,6 +36,7 @@
   },
   "devDependencies": {
     "babel-plugin-macros": "^2.8.0",
+    "babel-plugin-tester": "^9.0.1",
     "jest": "^26.0.1",
     "prettier": "^2.0.5"
   }
