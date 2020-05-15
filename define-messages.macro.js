@@ -9,14 +9,14 @@ const findPrefix = memberPath => {
 };
 
 const addId = ({ prop, prefix, t }) => {
-    const { key, value } = prop.node;
+    const { key, value } = prop;
     const { type: valueType } = value;
     const { name: keyName } = key;
 
     if (valueType === 'StringLiteral') {
-        const defaultMessageProperty = t.objectProperty(t.identifier('defaultMessage'), prop.node.value);
+        const defaultMessageProperty = t.objectProperty(t.identifier('defaultMessage'), value);
         const idProperty = t.objectProperty(t.identifier('id'), t.stringLiteral(`${prefix}.${keyName}`));
-        prop.node.value = t.objectExpression([idProperty, defaultMessageProperty]);
+        prop.value = t.objectExpression([idProperty, defaultMessageProperty]);
     } else if (valueType === 'ObjectExpression') {
         const properties = value.properties;
         if (properties.some(p => p.key.name === 'id')) return;
@@ -36,7 +36,7 @@ const replaceMessagesArgument = ({ callPath, prefix, t }) => {
         throw new MacroError('define-messages.macro: defineMessage should have object argument');
     }
 
-    const props = callArguments[0].get('properties');
+    const props = callArguments[0].node.properties;
 
     props.forEach(prop => addId({ prop, prefix, t }));
 };
