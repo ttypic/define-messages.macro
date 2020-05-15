@@ -12,6 +12,9 @@
   },
   "keywords": [
     "react-intl",
+    "create-react-app",
+    "i18n",
+    "l10n",
     "define-messages",
     "babel",
     "babel-macros",
