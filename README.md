@@ -1,5 +1,10 @@
 # define-messages.macro
 
+[![test](https://img.shields.io/github/workflow/status/ttypic/define-messages.macro/Test?label=tests&style=flat-square)](https://github.com/ttypic/define-messages.macro/actions)
+[![coverage-status](https://img.shields.io/codecov/c/github/ttypic/define-messages.macro.svg?style=flat-square)](https://codecov.io/gh/ttypic/define-messages.macro)
+[![npm](https://img.shields.io/npm/v/define-messages.macro.svg?style=flat-square)](https://www.npmjs.com/package/define-messages.macro)
+[![npm-downloads](https://img.shields.io/npm/dw/define-messages.macro.svg?style=flat-square)](https://www.npmjs.com/package/define-messages.macro)
+
 Babel macro which generates id for [React Intl](https://formatjs.io/docs/react-intl) messages automatically.
 This project was inspired by [babel-plugin-react-intl-auto](https://github.com/akameco/babel-plugin-react-intl-auto#readme),
 but it generates id for react-intl messages more explicitly and works with zero-config projects such as
