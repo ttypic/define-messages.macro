@@ -22,7 +22,7 @@ npm install --save-dev babel-plugin-macros
 
 and add in `.babelrc`:
 
-```shell script
+```json
 {
   "plugins": ["macros"]
 }
@@ -41,8 +41,9 @@ That’s it!
 ## Basic Usage
 
 -   `import defineMessages from 'define-messages.macro'`
--   setup prefix for file using `setupPrefix` method
+-   setup id unique prefix for file using `setupPrefix` method
 -   define messages
+-   (optional) update translations files using [react-intl-cli](https://github.com/ttypic/react-intl-cli)
 
 ```js
 import defineMessages from 'define-messages.macro';
@@ -55,7 +56,7 @@ const messages = defineMessages({
 });
 ```
 
-this code will be transform to:
+this code will be transformed to:
 
 ```js
 import { defineMessages } from 'react-intl';
@@ -72,7 +73,7 @@ const messages = defineMessages({
 });
 ```
 
-in `NODE_ENV !== 'production'` environment 
+in `NODE_ENV !== 'production'` environment
 
 and to:
 
@@ -89,13 +90,13 @@ const messages = {
 };
 ```
 
-in `NODE_ENV === 'production'` environment 
+in `NODE_ENV === 'production'` environment
 
 ## More Examples
 
 ### Define description field
 
-You could define `description` or other fields for your message:
+You could define `description` field for your message:
 
 ```js
 import defineMessages from 'define-messages.macro';
@@ -163,3 +164,7 @@ file path like in [babel-plugin-react-intl-auto](https://github.com/akameco/babe
 The main problem with auto ids that even small refactoring could break translations
 (e.g. you want to rename file with messages or move it). But option to implicitly generate prefix could be added in
 future releases.
+
+## License
+
+This package is licensed under MIT license.
