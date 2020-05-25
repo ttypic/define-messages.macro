@@ -41,7 +41,7 @@ That’s it!
 ## Basic Usage
 
 -   `import defineMessages from 'define-messages.macro'`
--   setup id unique prefix for file using `setupPrefix` method
+-   (optional) setup id unique prefix for file using `setupPrefix` method
 -   define messages
 -   (optional) update translations files using [react-intl-cli](https://github.com/ttypic/react-intl-cli)
 
@@ -93,6 +93,27 @@ const messages = {
 in `NODE_ENV === 'production'` environment
 
 ## More Examples
+
+### Without `setupPrefix` method
+
+You can use `define-messages.macro` without setting up prefix for id manually:
+
+```js
+// file: component/some-component/messages.js
+import defineMessages from 'define-messages.macro';
+
+const messages = defineMessages({
+    greeting: 'hello',
+    goodbye: 'goodbye'
+});
+
+//     ↓ ↓ ↓ ↓ ↓ ↓
+
+const messages = defineMessages({
+    greeting: 'component.some-component.hello',
+    goodbye: 'component.some-component.goodbye'
+});
+```
 
 ### Define description field
 
@@ -157,13 +178,34 @@ const messages = defineMessages({
 });
 ```
 
-## Why should I setup prefix manually?
+## Configuration 
 
-In my opinion it's better to explicitly setup prefix for your ids instead of generate them automatically based on
-file path like in [babel-plugin-react-intl-auto](https://github.com/akameco/babel-plugin-react-intl-auto#readme).
-The main problem with auto ids that even small refactoring could break translations
-(e.g. you want to rename file with messages or move it). But option to implicitly generate prefix could be added in
-future releases.
+[babel-plugin-macros](https://github.com/kentcdodds/babel-plugin-macros#readme) uses 
+[cosmiconfig](https://github.com/davidtheclark/cosmiconfig#readme) to read a babel-plugin-macros configuration
+which can be located in any of the following files up the directories from the importing file:
+
+* `.babel-plugin-macrosrc`
+* `.babel-plugin-macrosrc.json`
+* `.babel-plugin-macrosrc.yaml`
+* `.babel-plugin-macrosrc.yml`
+* `.babel-plugin-macrosrc.js`
+* `babel-plugin-macros.config.js`
+* `babelMacros` in `package.json`
+
+You can then specify plugin options in `defineMessages` entry:
+
+* `relativeTo` - allows you to specify the directory that is used when determining a file's prefix
+
+```js
+// babel-plugin-macros.config.js
+module.exports = {
+    // ...
+    // Other macros config
+    defineMessages: {
+        relativeTo: 'src' // by default path is babel work directory 
+    }
+}
+```
 
 ## License
 
