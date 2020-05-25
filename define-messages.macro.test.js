@@ -27,15 +27,29 @@ pluginTester({
                 process.env.NODE_ENV = 'development';
             }
         },
-        'it add id prop for object messages': {
+        'it adds id prop for object messages': {
             fixture: path.join(__dirname, 'fixtures/add-id-to-object/code.js'),
             outputFixture: path.join(__dirname, 'fixtures/add-id-to-object/output.js'),
             setup: () => {
                 process.env.NODE_ENV = 'production';
             }
         },
-        'it throws MacroError if no `setupPrefix` method calls': {
+        'it works without setup method': {
             fixture: path.join(__dirname, 'fixtures/no-setup-method/code.js'),
+            outputFixture: path.join(__dirname, 'fixtures/no-setup-method/output.js'),
+            setup: () => {
+                process.env.NODE_ENV = 'development';
+            }
+        },
+        'it takes relative path from config': {
+            fixture: path.join(__dirname, 'fixtures/with-config/code.js'),
+            outputFixture: path.join(__dirname, 'fixtures/with-config/output.js'),
+            setup: () => {
+                process.env.NODE_ENV = 'development';
+            }
+        },
+        'it throws MacroError if more than one `setupPrefix` method calls': {
+            fixture: path.join(__dirname, 'fixtures/gt-one-setup-method/code.js'),
             error: Macros.MacroError
         },
         'it throws MacroError if `setupPrefix` method spelled wrong': {

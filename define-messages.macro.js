@@ -1,11 +1,26 @@
 const { createMacro, MacroError } = require('babel-plugin-macros');
 const { addNamed } = require('@babel/helper-module-imports');
 
-const findPrefix = memberPath => {
+const path = require('path');
+
+const findPrefix = members => {
+    if (members.length !== 1) {
+        throw new MacroError('define-messages.macro: you shouldn`t setup more than one file prefix');
+    }
+
+    const memberPath = members[0].parentPath;
+
     if (memberPath.node.property.name !== 'setupPrefix') {
         throw new MacroError('define-messages.macro: `defineMessage` has one only `setupPrefix` method');
     }
+
     return memberPath.parentPath.get('arguments')[0].evaluate().value;
+};
+
+const buildDefaultPrefix = ({ filename, config }) => {
+    const { relativeTo = process.cwd() } = config;
+    const relativeDirs = path.relative(relativeTo, path.dirname(filename)).split(path.sep);
+    return relativeDirs.join('.');
 };
 
 const addId = ({ prop, prefix, t }) => {
@@ -43,20 +58,17 @@ const replaceMessagesArgument = ({ callPath, prefix, t }) => {
     props.forEach(prop => addId({ prop, prefix, t }));
 };
 
-const defineMessagesMacro = ({ references, state, babel }) => {
+const defineMessagesMacro = ({ references, state, babel, config }) => {
     const { types: t } = babel;
-    const { path: program } = state.file;
+    const { path: program, opts } = state.file;
+
+    const filename = opts.filename;
 
     const calls = references.default.filter(referencePath => referencePath.parentPath.type === 'CallExpression');
     const members = references.default.filter(referencePath => referencePath.parentPath.type === 'MemberExpression');
 
-    if (members.length !== 1) {
-        throw new MacroError('define-messages.macro: you should setup exact one file prefix');
-    }
-
-    const memberExpression = members[0].parentPath;
-    const prefix = findPrefix(memberExpression);
-    memberExpression.getStatementParent().remove();
+    const prefix = members.length === 0 ? buildDefaultPrefix({ filename, config }) : findPrefix(members);
+    members.forEach(referencePath => referencePath.getStatementParent().remove());
 
     if (process.env.NODE_ENV === 'production') {
         // remove defineMessages call is production
@@ -78,4 +90,6 @@ const defineMessagesMacro = ({ references, state, babel }) => {
     }
 };
 
-module.exports = createMacro(defineMessagesMacro);
+module.exports = createMacro(defineMessagesMacro, {
+    configName: 'defineMessages'
+});
