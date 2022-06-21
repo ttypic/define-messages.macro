@@ -1,6 +1,6 @@
 {
   "name": "define-messages.macro",
-  "version": "0.3.0-dev",
+  "version": "0.2.1",
   "description": "Generate id for react-intl messages automatically",
   "main": "define-messages.macro.js",
   "scripts": {
