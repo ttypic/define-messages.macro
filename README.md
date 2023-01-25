@@ -1,6 +1,6 @@
 # define-messages.macro
 
-[![test](https://img.shields.io/github/workflow/status/ttypic/define-messages.macro/Test?label=tests&style=flat-square)](https://github.com/ttypic/define-messages.macro/actions)
+[![test](https://img.shields.io/github/actions/workflow/status/ttypic/define-messages.macro/test.yml?branch=main&style=flat-square)](https://github.com/ttypic/define-messages.macro/actions)
 [![coverage-status](https://img.shields.io/codecov/c/github/ttypic/define-messages.macro.svg?style=flat-square)](https://codecov.io/gh/ttypic/define-messages.macro)
 [![npm](https://img.shields.io/npm/v/define-messages.macro.svg?style=flat-square)](https://www.npmjs.com/package/define-messages.macro)
 [![npm-downloads](https://img.shields.io/npm/dt/define-messages.macro.svg?label=total%20downloads&style=flat-square)](https://www.npmjs.com/package/define-messages.macro)
