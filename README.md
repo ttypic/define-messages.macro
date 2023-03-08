@@ -3,8 +3,7 @@
 [![test](https://img.shields.io/github/actions/workflow/status/ttypic/define-messages.macro/test.yml?branch=main&style=flat-square)](https://github.com/ttypic/define-messages.macro/actions)
 [![coverage-status](https://img.shields.io/codecov/c/github/ttypic/define-messages.macro.svg?style=flat-square)](https://codecov.io/gh/ttypic/define-messages.macro)
 [![npm](https://img.shields.io/npm/v/define-messages.macro.svg?style=flat-square)](https://www.npmjs.com/package/define-messages.macro)
-[![npm-downloads](https://img.shields.io/npm/dt/define-messages.macro.svg?label=total%20downloads&style=flat-square)](https://www.npmjs.com/package/define-messages.macro)
-[![npm-downloads](https://img.shields.io/npm/dw/define-messages.macro.svg?style=flat-square)](https://www.npmjs.com/package/define-messages.macro)
+[![npm-downloads](https://img.shields.io/npm/dw/define-messages.macro.svg?style=flat-square)](https://npm-stat.com/charts.html?package=define-messages.macro&from=2020-04-01)
 
 Babel macro which generates id for [React Intl](https://formatjs.io/docs/react-intl) messages automatically.
 This project was inspired by [babel-plugin-react-intl-auto](https://github.com/akameco/babel-plugin-react-intl-auto#readme),
